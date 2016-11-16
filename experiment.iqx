@@ -1,0 +1,82 @@
+﻿<item instruction>
+/1="请观察出现的汉子，如果颜色为红，请按F键；如果颜色为绿，请按J键"
+</item>
+
+<item any>
+/1="请按任意键继续"
+</item>
+
+<item word>
+/1="汉字"
+</item>
+
+
+
+<text instructiontxt>
+/items=instruction
+/fontstyle = ("宋体",4pct)
+/txbgcolor = (0,0,0)
+/txcolor = (255,255,255)
+/size = (1300,800)
+/hjustify = left
+</text>
+
+<text anytxt>
+/items = any
+/vposition = 70pct
+/fontstyle = ("宋体",24pct)
+/txcolor = (255,0,0)
+/txbgcolor = (transparent)
+</text>
+
+<text redtxt>
+/items = word
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (0,0,0)
+/txcolor = (255,0,0)
+</text>
+
+<text greentxt>
+/items = word
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (0,0,0)
+/txcolor = (0,255,0)
+</text>
+
+
+<trial instruction>
+/validresponse = (anyresponse)
+/stimulusframes = [1=instructiontxt,anytxt]
+/recorddata = false
+</trial>
+
+<trial redtrial>
+/pretrialpause = 500
+/validresponse = ("F","J")
+/correctresponse = ("F")
+/stimulusframes = [1=redtxt]
+</trial>
+
+<trial greentrial>
+/pretrialpause = 500
+/validresponse = ("F","J")
+/correctresponse = ("J")
+/stimulusframes = [1=greentxt]
+</trial>
+
+
+<block instructionblk>
+/screencolor = (0,0,0)
+/trials = [1=instruction]
+</block>
+
+<block wordblk>
+/screencolor = (0,0,0)
+/blockfeedback = (meanlatency,correct)
+/trials = [1-12=noreplace(redtrial,greentrial)]
+</block>
+
+
+<expt>
+/blocks = [1=instructionblk;2=wordblk]
+</expt>
